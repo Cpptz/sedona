@@ -210,9 +210,9 @@ private class GeotiffFileWriter(savePath: String,
     val referencedEnvelope = new ReferencedEnvelope(coordinateList(0).x, coordinateList(2).x, coordinateList(0).y, coordinateList(2).y, crs)
 
     // create the write path
-    val writePath = Paths.get(savePath, new Path(tiffOrigin).getName).toString
-    val out = hfs.create(new Path(writePath))
-
+    val writePath = new Path(savePath, new Path(tiffOrigin).getName)
+    val out = hfs.create(writePath)
+    
     val format = GridFormatFinder.findFormat(out)
     var hints: Hints = null
     if (format.isInstanceOf[GeoTiffFormat]) {
